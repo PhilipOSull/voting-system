@@ -13,12 +13,14 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('voting_system')
 
+
 def clear():
     """
     This clears the screen/terminal
     """
 
     print('\033c')
+
 
 def reset():
     """
@@ -43,6 +45,7 @@ def reset():
 
     SHEET.worksheet("Voters").update_cells(cell_list)
 
+
 def validate_pps(pps):
     """
     This makes sure the PPS number entered is valid
@@ -63,6 +66,7 @@ def validate_pps(pps):
         return False
     return True
 
+
 def voting(nominee_1, nominee_2, voter_id):
     """
     Voter enters their PPS number, if the PPS number is on the worksheet
@@ -74,7 +78,7 @@ def voting(nominee_1, nominee_2, voter_id):
     If the vote is valid, the the spreadsheet will be updated to show they have
     voted and which nominee they have voted for.
     """
-   
+
     nominee_1_votes, nominee_2_votes = 0, 0
     while True:
         if voter_id == []:
@@ -90,7 +94,7 @@ def voting(nominee_1, nominee_2, voter_id):
                 else:
                     print(f"{nominee_1} wins, with {percent}% of the votes")
                 break
-            elif nominee_2_votes > nominee_1_votes:
+            if nominee_2_votes > nominee_1_votes:
                 percent = round(
                     (nominee_2_votes / total_votes) * 100,
                     2
@@ -121,7 +125,7 @@ def voting(nominee_1, nominee_2, voter_id):
                             sleep(5)
                             clear()
                             break
-                        elif try_again != "y" or "n":
+                        if try_again != "y" or "n":
                             print("Sorry that answer is invalid...")
                             print("Goodbye.\n")
                             print("Have a nice day.")
@@ -146,7 +150,7 @@ def voting(nominee_1, nominee_2, voter_id):
                         sleep(5)
                         clear()
                         break
-                    elif try_again != "y" or "n":
+                    if try_again != "y" or "n":
                         print("Sorry but that answer is invalid...")
                         print("Goodbye.\n")
                         print("Have a nice day.")
@@ -211,6 +215,7 @@ def voting(nominee_1, nominee_2, voter_id):
                               "in the future.\n")
                         sleep(5)
                         clear()
+
 
 def main():
     """
