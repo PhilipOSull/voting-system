@@ -12,6 +12,13 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('voting_system')
 
+def clear():
+    """
+    This clears the screen/terminal
+    """
+
+    print('\033c')
+
 def validate_pps(pps):
     """
     This makes sure the PPS number entered is valid
@@ -191,6 +198,7 @@ def main():
     Run all program functions
     """
 
+    clear()
     print("-----------------------")
     print("-----------------------\n")
     print("Welcome to the Election\n")
