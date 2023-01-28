@@ -67,7 +67,7 @@ def validate_pps(pps):
     return True
 
 
-def voting(nominee_1, nominee_2, voter_id):
+def voting(nominee_1, nominee_2, voter_id_list):
     """
     Voter enters their PPS number, if the PPS number is on the worksheet
     then they are registered and can vote.
@@ -81,7 +81,7 @@ def voting(nominee_1, nominee_2, voter_id):
 
     nominee_1_votes, nominee_2_votes = 0, 0
     while True:
-        if voter_id == []:
+        if voter_id_list == []:
             total_votes = nominee_1_votes + nominee_2_votes
             print("Voting is now closed\n")
             if nominee_1_votes >= nominee_2_votes:
@@ -157,10 +157,10 @@ def voting(nominee_1, nominee_2, voter_id):
                         sleep(5)
                         clear()
                         break
-            if voter in voter_id:
+            if voter in voter_id_list:
                 print(f"Welcome voter ID number: {voter}\n")
                 print("You are registered to Vote\n")
-                voter_id.remove(voter)
+                voter_id_list.remove(voter)
                 vote = (input(
                     "Would you like to vote for Teddy(1) or Syd(2):\n"))
 
@@ -230,9 +230,9 @@ def main():
     print("-----------------------")
     print("-----------------------\n")
     nominee_1, nominee_2 = SHEET.worksheet("Nominees").col_values(1)[1:]
-    voter_id = SHEET.worksheet("Voters").col_values(1)[1:]
-    voter_id = [int(num) for num in voter_id]
-    voting(nominee_1, nominee_2, voter_id)
+    voter_id_list = SHEET.worksheet("Voters").col_values(1)[1:]
+    voter_id_list = [int(num) for num in voter_id_list]
+    voting(nominee_1, nominee_2, voter_id_list)
 
 
 main()
