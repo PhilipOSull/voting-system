@@ -12,8 +12,3 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('voting_system')
 
-voter_data = SHEET.worksheet('Voters')
-
-data = voter_data.get_all_values()
-
-print(data)
