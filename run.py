@@ -12,6 +12,26 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('voting_system')
 
+def validate_pps(pps):
+    """
+    This makes sure the PPS number entered is valid
+    If the PPS number is not 8 characters, it will return False
+    If the first 7 characters are not numbers, it will return False
+    If the last character is not a letter, it will return False
+    Otherwise it will return True
+    """
+
+    if len(pps) != 8:
+        return False
+    pps_numbers = pps[:7]
+    for item in pps_numbers:
+        if not item.isdigit():
+            return False
+    pps_chars = pps[-1]
+    if not pps_chars[0].isalpha():
+        return False
+    return True
+
 def voting(nominee_1, nominee_2, voter_id):
    
     nominee_1_votes, nominee_2_votes = 0, 0
@@ -109,7 +129,7 @@ def voting(nominee_1, nominee_2, voter_id):
                           "in the future.\n")
                     print("Next Voter")
                     continue
-                
+
                 vote = int(vote)
                 cell_values = [0, "None"]
                 if vote == 1:
