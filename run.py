@@ -1,4 +1,5 @@
 import gspread
+from time import sleep
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
