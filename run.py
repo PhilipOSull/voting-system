@@ -19,6 +19,29 @@ def clear():
 
     print('\033c')
 
+def reset():
+    """
+    This resets the vote column to 0
+    It resets the nominee column to "None"
+    """
+
+    wst_data_len = len(SHEET.worksheet("Voters").col_values(1)[1:])
+    cell_list = SHEET.worksheet("Voters").range(f"E2:E{wst_data_len+1}")
+    cell_values = [0]*wst_data_len
+
+    for i, val in enumerate(cell_values):
+        cell_list[i].value = val
+    
+    SHEET.worksheet("Voters").update_cells(cell_list)
+
+    cell_list = SHEET.worksheet("Voters").range(f"F2:F{wst_data_len+1}")
+    cell_values = ["None"]*wst_data_len
+
+    for i, val in enumerate(cell_values):
+        cell_list[i].value = val
+
+    SHEET.worksheet("Voters").update_cells(cell_list)
+
 def validate_pps(pps):
     """
     This makes sure the PPS number entered is valid
@@ -198,6 +221,7 @@ def main():
     Run all program functions
     """
 
+    reset()
     clear()
     print("-----------------------")
     print("-----------------------\n")
