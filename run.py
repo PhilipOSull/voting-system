@@ -64,6 +64,16 @@ def validate_pps(pps):
     return True
 
 def voting(nominee_1, nominee_2, voter_id):
+    """
+    Voter enters their PPS number, if the PPS number is on the worksheet
+    then they are registered and can vote.
+    If the PPS number format is valid but not on the worksheet then they are 
+    not registered and cannot vote.
+    If the PPS number format is invalid, they will be prompted if they
+    would like to try again.
+    If the vote is valid, the the spreadsheet will be updated to show they have
+    voted and which nominee they have voted for.
+    """
    
     nominee_1_votes, nominee_2_votes = 0, 0
     while True:
@@ -80,7 +90,6 @@ def voting(nominee_1, nominee_2, voter_id):
                 else:
                     print(f"{nominee_1} wins, with {percent}% of the votes")
                 break
-
             elif nominee_2_votes > nominee_1_votes:
                 percent = round(
                     (nominee_2_votes / total_votes) * 100,
@@ -88,7 +97,6 @@ def voting(nominee_1, nominee_2, voter_id):
                 )
                 print(f"{nominee_2} wins, with {percent}% of the votes")
                 break
-
         else:
             voter = None
             pps = input(
@@ -99,7 +107,6 @@ def voting(nominee_1, nominee_2, voter_id):
                 if pps_exists:
                     voter = pps_exists.row-1
                 else:
-                    # voter = None
                     print(f"The PPS you entered is {pps}, sorry that PPS "
                           "is not registered to vote.\n")
                     try_again = input(
@@ -134,19 +141,18 @@ def voting(nominee_1, nominee_2, voter_id):
                         break
                     if try_again == "n":
                         print("Goodbye, please use a valid PPS number "
-                              "next time.\n")
+                              "next time...\n")
                         print("Have a nice day.")
                         sleep(5)
                         clear()
                         break
                     elif try_again != "y" or "n":
-                        print("Sorry that answer is invalid...")
+                        print("Sorry but that answer is invalid...")
                         print("Goodbye.\n")
                         print("Have a nice day.")
                         sleep(5)
                         clear()
                         break
-                # voter = None
             if voter in voter_id:
                 print(f"Welcome voter ID number: {voter}\n")
                 print("You are registered to Vote\n")
@@ -155,67 +161,56 @@ def voting(nominee_1, nominee_2, voter_id):
                     "Would you like to vote for Teddy(1) or Syd(2):\n"))
 
                 if not vote.isdigit():
-                    print("Your vote is invalid/spoilt.")
+                    print("Sorry but your vote is invalid/spoilt...")
                     print("Please make sure to vote correctly "
                           "in the future.\n")
-                    print("Next Voter")
+                    sleep(5)
+                    clear()
                     continue
-
                 vote = int(vote)
                 cell_values = [0, "None"]
                 if vote == 1:
                     nominee_1_votes += 1
-                    print("Thank you for your vote\n")
-                    print("Have a nice day")
+                    print("Thank you for your vote.\n")
+                    print("Have a nice day.")
                     cell_values[0] = 1
                     cell_values[1] = nominee_1
                     sleep(5)
                     clear()
-                    
-                    clear()
-
                 elif vote == 2:
                     nominee_2_votes += 1
-                    print("Thank you for your vote\n")
-                    print("Have a nice day")
+                    print("Thank you for your vote.\n")
+                    print("Have a nice day.")
                     cell_values[0] = 1
                     cell_values[1] = nominee_2
                     sleep(5)
                     clear()
-
                 else:
-                    print("Your vote is invalid/spoilt.")
+                    print("Sorry but your vote is invalid/spoilt...")
                     print("Please make sure to vote correctly "
                           "in the future.\n")
-                    print("Next Voter")
+                    sleep(5)
+                    clear()
                     continue
-
                 cell_list = SHEET.worksheet("Voters").range(f"E{voter+1}:F{voter+1}")
                 for i, val in enumerate(cell_values):
-                    cell_list[i].value = val 
-
+                    cell_list[i].value = val
                 SHEET.worksheet("Voters").update_cells(cell_list)
-
             else:
                 if voter is not None:
                     voter_exists = int(SHEET.worksheet("Voters").cell(voter+1, 5).value)
                     if voter_exists == 1:
-                        print("Sorry you have already voted\n")
-                        print("Next Voter")
+                        print("Sorry but you have already voted...\n")
+                        print("Thanks and have a nice day.")
+                        sleep(5)
+                        clear()
                     else:
                         print("Sorry but your vote was counted "
-                              "as invalid/spoilt.")
+                              "as invalid/spoilt...")
                         print("Please make sure to vote correctly "
                               "in the future.\n")
-                        print("Next Voter")
-
-
-
-
-
-
-
-
+                        sleep(5)
+                        clear()
 
 def main():
     """
