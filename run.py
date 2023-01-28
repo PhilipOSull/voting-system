@@ -70,6 +70,93 @@ def voting(nominee_1, nominee_2, voter_id):
                             sleep(5)
                             clear()
                             break
+            else:
+                print(f"The PPS you entered is {pps}, "
+                      "sorry that format is incorrect.")
+                print("Your PPS number should be 7 numbers followed by a "
+                      "letter, Example: 1234567T\n")
+                try_again = input("Would you like to try again? Y/N\n").lower()
+                while True:
+                    if try_again == "y":
+                        print("Double check the format is correct "
+                              "this time...\n")
+                        break
+                    if try_again == "n":
+                        print("Goodbye, please use a valid PPS number "
+                              "next time.\n")
+                        print("Have a nice day.")
+                        sleep(5)
+                        clear()
+                        break
+                    elif try_again != "y" or "n":
+                        print("Sorry that answer is invalid...")
+                        print("Goodbye.\n")
+                        print("Have a nice day.")
+                        sleep(5)
+                        clear()
+                        break
+                # voter = None
+            if voter in voter_id:
+                print(f"Welcome voter ID number: {voter}\n")
+                print("You are registered to Vote\n")
+                voter_id.remove(voter)
+                vote = (input(
+                    "Would you like to vote for Teddy(1) or Syd(2):\n"))
+
+                if not vote.isdigit():
+                    print("Your vote is invalid/spoilt.")
+                    print("Please make sure to vote correctly "
+                          "in the future.\n")
+                    print("Next Voter")
+                    continue
+                
+                vote = int(vote)
+                cell_values = [0, "None"]
+                if vote == 1:
+                    nominee_1_votes += 1
+                    print("Thank you for your vote\n")
+                    print("Have a nice day")
+                    cell_values[0] = 1
+                    cell_values[1] = nominee_1
+                    sleep(5)
+                    clear()
+                    
+                    clear()
+
+                elif vote == 2:
+                    nominee_2_votes += 1
+                    print("Thank you for your vote\n")
+                    print("Have a nice day")
+                    cell_values[0] = 1
+                    cell_values[1] = nominee_2
+                    sleep(5)
+                    clear()
+
+                else:
+                    print("Your vote is invalid/spoilt.")
+                    print("Please make sure to vote correctly "
+                          "in the future.\n")
+                    print("Next Voter")
+                    continue
+
+                cell_list = SHEET.worksheet("Voters").range(f"E{voter+1}:F{voter+1}")
+                for i, val in enumerate(cell_values):
+                    cell_list[i].value = val 
+
+                SHEET.worksheet("Voters").update_cells(cell_list)
+
+            else:
+                if voter is not None:
+                    voter_exists = int(SHEET.worksheet("Voters").cell(voter+1, 5).value)
+                    if voter_exists == 1:
+                        print("Sorry you have already voted\n")
+                        print("Next Voter")
+                    else:
+                        print("Sorry but your vote was counted "
+                              "as invalid/spoilt.")
+                        print("Please make sure to vote correctly "
+                              "in the future.\n")
+                        print("Next Voter")
 
 
 
