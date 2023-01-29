@@ -67,6 +67,14 @@ which nominee they have voted for.
 - The user will input their PPS, the function will check if that PPS matches
 a PPS on the spreadsheet. If it matches with a PPS on the spreadsheet the user will receive a message showing their voter ID and which nominee they would like to vote for. Once the user has chosen either of these nominees they will be prompted with a message confirming the vote. Then the Google Spreadsheet will be updated with this information.
 
+### Google sheet voting system schema
+
+- ID (integer) |
+PPS (string) |
+ADMIN (boolean 1 or 0) |
+VOTE (boolean 1 or 0) |
+NOMINEE (string)
+
 ### Note
 
 - I acknowledge that perhaps a real-world electronic voting system would allow the user to re-try voting if they provided an invalid candidate number, however, traditional voting systems account for  spoilt votes, which I wanted to simulate here. The program already demonstrates input validation elsewhere (with the option for the user to retry where they've entered an invalid input).
@@ -93,58 +101,66 @@ a PPS on the spreadsheet. If it matches with a PPS on the spreadsheet the user w
 ## Features
 
 ### Welcome Message
-- 
+- Welcoming the voter
 <img src="docs/voting-welcome-message.png">
 
 ### Input valid PPS from Google Spreadsheet
-- 
+- Print the users voter ID number and ask them which nominee to vote for
 <img src="docs/voting-prompted-to-vote.png">
 
 ### Input valid option for nominee
-- 
+- Confirm the users vote
 <img src="docs/voting-prompted-to-vote-valid.png">
 
 ### Input an invalid option for nominee
-- 
+- Inform the user that their input was invalid and their vote is spoilt
 <img src="docs/voting-input-invalid-vote.png">
 
 ### Input a PPS that has had an invalid/Spoilt vote
-- 
+- Inform the user that this PPS has already voted and the vote was counted as spoilt
 <img src="docs/voting-input-pps-with-invalid-vote.png">
 
 ### Input a PPS number that has already voted
-- 
+- Inform the user that this PPS number has already voted
 <img src="docs/voting-pps-already-voted.png">
 
-### Input a PPS in correct format but not on the Google Spreadsheet
-- 
+### Input a PPS in correct format that is not in the Google Spreadsheet
+- Inform the user that this PPS is not registered to vote
 <img src="docs/voting-pps-not-on-spreadsheet.png">
 
 ### Answer - 'Y'es
-- 
+- Inform the user to double check their PPS when they retry
 <img src="docs/voting-pps-not-registered-retry-yes.png">
 
 ### Answer - 'N'o
-- 
+- Let the user know to register before the next election
 <img src="docs/voting-pps-not-registered-retry-no.png">
 
 ### Input a PPS in invalid format
-- 
+- Let the user know the PPS the entered is in invalid format and give an example
 <img src="docs/voting-pps-invalid-format.png">
 
 ### Answer - 'Y'es
-- 
+- Inform the user to make sure that the format is correct when they retry
 <img src="docs/voting-pps-invalid-format-yes.png">
 
 ### Answer - 'N'o
-- 
+- Inform the user to use a valid PPS number next time they vote
 <img src="docs/voting-pps-invalid-format-no.png">
+
+### Input all votes for a draw
+- 
+<img src="docs/voting-result-draw.png">
+
+### Input all votes for a win
+- 
+<img src="docs/voting-result-win.png">
 
 
 ### Features to implement in the future
 
-- I would like to add an Admin
-- I would like to add a password, so each user would enter their PPS followed by a password to vote
+- I would like to add the Admin functionality. Adjust the voting system settings (example: modify the maximum amount of voters). An extra spreadsheet with Admin settings. From my voting system schema you can see that Admin is the user with 1 in the Admin column.
+- I would like to add a password(login/sign up functionality), so each user would enter their PPS followed by a password to vote.
 
 ## Validation
 
@@ -157,6 +173,8 @@ a PPS on the spreadsheet. If it matches with a PPS on the spreadsheet the user w
 4. Click on 'Python: Select Linter' from the filtered results.
 5. Select 'pycodestyle' from the list.
 6. PEP8 errors will now be underlined in red, as well as being listed in the PROBLEMS tab beside the terminal.
+
+There were no errors or warnings.
 
 ### Testing user stories
 
@@ -208,6 +226,14 @@ a PPS on the spreadsheet. If it matches with a PPS on the spreadsheet the user w
 |-------------|------------|---------------------|-------------------|
 | End result | Input all 4 votes using all valid 4 PPS numbers | Ends the voting and prompts the user with the correct result | PASSED |
 
+## Bugs
+
+| **Bug** | **Fix** |
+| ----------- | ----------- |
+| Terminal cleared too fast after each user had voted preventing them from seeing the confirmation message | Imported and used the sleep function with a 5 second timer |
+| Welcome message wouldn't display for new voter | Create welcome message function |
+
+
 ## Deployment
 
 - Deploy to Heroku following these steps:
@@ -250,7 +276,16 @@ a PPS on the spreadsheet. If it matches with a PPS on the spreadsheet the user w
 
 ## Credits
 
-### Content
+### Code
+
+- Code Institute Love Sandwiches project
+- Code institute Python lessons
+- Stackoverflow https://stackoverflow.com/questions/16675258/python-gspread-how-can-i-update-multiple-cells-with-different-values-at-once
+- Google
+- YouTube https://www.youtube.com/watch?v=KqyZc6uR9QU
+
+## Extra note
+- I had an issue with the first repository, so I created a new repository when my mentor reccomended it.
 
 ## Acknowledgements
 

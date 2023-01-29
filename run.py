@@ -71,7 +71,7 @@ def voting(nominee_1, nominee_2, voter_id_list):
     """
     Voter enters their PPS number, if the PPS number is on the worksheet
     then they are registered and can vote.
-    If the PPS number format is valid but not on the worksheet then they are 
+    If the PPS number format is valid but not on the worksheet then they are
     not registered and cannot vote.
     If the PPS number format is invalid, they will be prompted if they
     would like to try again.
@@ -126,14 +126,10 @@ def voting(nominee_1, nominee_2, voter_id_list):
                             clear()
                             welcome_message()
                             break
-                        if try_again != "y" or "n":
-                            print("Sorry that answer is invalid...")
-                            print("Goodbye.\n")
-                            print("Have a nice day.")
-                            sleep(5)
-                            clear()
-                            welcome_message()
-                            break
+                        if try_again not in ['y', 'n']:
+                            print("Sorry that answer is invalid...\n")
+                            try_again = input(
+                                "Would you like to try again? Y/N\n").lower()
             else:
                 print(f"The PPS you entered is {pps}, "
                       "sorry that format is incorrect.")
@@ -153,14 +149,10 @@ def voting(nominee_1, nominee_2, voter_id_list):
                         clear()
                         welcome_message()
                         break
-                    if try_again != "y" or "n":
-                        print("Sorry but that answer is invalid...")
-                        print("Goodbye.\n")
-                        print("Have a nice day.")
-                        sleep(5)
-                        clear()
-                        welcome_message()
-                        break
+                    if try_again not in ["y", "n"]:
+                        print("Sorry but that answer is invalid...\n")
+                        try_again = input(
+                            "Would you like to try again? Y/N\n").lower()
             if voter in voter_id_list:
                 print(f"Welcome voter ID number: {voter}\n")
                 print("You are registered to Vote\n")
@@ -248,11 +240,7 @@ def main():
 
     reset()
     clear()
-    print("-----------------------------------------")
-    print("-----------------------------------------\n")
-    print("Welcome to the electronic voting Election\n")
-    print("-----------------------------------------")
-    print("-----------------------------------------\n")
+    welcome_message()
     nominee_1, nominee_2 = SHEET.worksheet("Nominees").col_values(1)[1:]
     voter_id_list = SHEET.worksheet("Voters").col_values(1)[1:]
     voter_id_list = [int(num) for num in voter_id_list]
