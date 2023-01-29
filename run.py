@@ -34,7 +34,7 @@ def reset():
 
     for i, val in enumerate(cell_values):
         cell_list[i].value = val
-    
+
     SHEET.worksheet("Voters").update_cells(cell_list)
 
     cell_list = SHEET.worksheet("Voters").range(f"F2:F{wst_data_len+1}")
@@ -124,6 +124,7 @@ def voting(nominee_1, nominee_2, voter_id_list):
                                   "before the next election.\n")
                             sleep(5)
                             clear()
+                            welcome_message()
                             break
                         if try_again != "y" or "n":
                             print("Sorry that answer is invalid...")
@@ -131,6 +132,7 @@ def voting(nominee_1, nominee_2, voter_id_list):
                             print("Have a nice day.")
                             sleep(5)
                             clear()
+                            welcome_message()
                             break
             else:
                 print(f"The PPS you entered is {pps}, "
@@ -149,6 +151,7 @@ def voting(nominee_1, nominee_2, voter_id_list):
                         print("Have a nice day.")
                         sleep(5)
                         clear()
+                        welcome_message()
                         break
                     if try_again != "y" or "n":
                         print("Sorry but that answer is invalid...")
@@ -156,6 +159,7 @@ def voting(nominee_1, nominee_2, voter_id_list):
                         print("Have a nice day.")
                         sleep(5)
                         clear()
+                        welcome_message()
                         break
             if voter in voter_id_list:
                 print(f"Welcome voter ID number: {voter}\n")
@@ -163,14 +167,15 @@ def voting(nominee_1, nominee_2, voter_id_list):
                 voter_id_list.remove(voter)
                 vote = (input(
                     "Would you like to vote for Teddy(1) or Syd(2):\n"))
-
                 if not vote.isdigit():
                     print("Sorry but your vote is invalid/spoilt...")
                     print("Please make sure to vote correctly "
                           "in the future.\n")
                     sleep(5)
                     clear()
+                    welcome_message()
                     continue
+
                 vote = int(vote)
                 cell_values = [0, "None"]
                 if vote == 1:
@@ -181,6 +186,7 @@ def voting(nominee_1, nominee_2, voter_id_list):
                     cell_values[1] = nominee_1
                     sleep(5)
                     clear()
+                    welcome_message()
                 elif vote == 2:
                     nominee_2_votes += 1
                     print("Thank you for your vote.\n")
@@ -189,25 +195,31 @@ def voting(nominee_1, nominee_2, voter_id_list):
                     cell_values[1] = nominee_2
                     sleep(5)
                     clear()
+                    welcome_message()
                 else:
                     print("Sorry but your vote is invalid/spoilt...")
                     print("Please make sure to vote correctly "
                           "in the future.\n")
                     sleep(5)
                     clear()
+                    welcome_message()
                     continue
-                cell_list = SHEET.worksheet("Voters").range(f"E{voter+1}:F{voter+1}")
+
+                cell_list = SHEET.worksheet("Voters").range(
+                    f"E{voter+1}:F{voter+1}")
                 for i, val in enumerate(cell_values):
                     cell_list[i].value = val
                 SHEET.worksheet("Voters").update_cells(cell_list)
             else:
                 if voter is not None:
-                    voter_exists = int(SHEET.worksheet("Voters").cell(voter+1, 5).value)
+                    voter_exists = int(
+                        SHEET.worksheet("Voters").cell(voter+1, 5).value)
                     if voter_exists == 1:
                         print("Sorry but you have already voted...\n")
                         print("Thanks and have a nice day.")
                         sleep(5)
                         clear()
+                        welcome_message()
                     else:
                         print("Sorry but your vote was counted "
                               "as invalid/spoilt...")
@@ -215,6 +227,18 @@ def voting(nominee_1, nominee_2, voter_id_list):
                               "in the future.\n")
                         sleep(5)
                         clear()
+                        welcome_message()
+
+
+def welcome_message():
+    """
+    welcome message for each voter
+    """
+    print("-----------------------------------------")
+    print("-----------------------------------------\n")
+    print("Welcome to the electronic voting Election\n")
+    print("-----------------------------------------")
+    print("-----------------------------------------\n")
 
 
 def main():
@@ -224,11 +248,11 @@ def main():
 
     reset()
     clear()
-    print("-----------------------")
-    print("-----------------------\n")
-    print("Welcome to the Election\n")
-    print("-----------------------")
-    print("-----------------------\n")
+    print("-----------------------------------------")
+    print("-----------------------------------------\n")
+    print("Welcome to the electronic voting Election\n")
+    print("-----------------------------------------")
+    print("-----------------------------------------\n")
     nominee_1, nominee_2 = SHEET.worksheet("Nominees").col_values(1)[1:]
     voter_id_list = SHEET.worksheet("Voters").col_values(1)[1:]
     voter_id_list = [int(num) for num in voter_id_list]
