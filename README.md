@@ -31,21 +31,22 @@ The application provides a working electronic voting system.
 ### User Requirements and Expectations
 
 ### User Stories
-1. To show your ID with your PPS number
-2. To stand in line
-3. To enter booth with computer inside already running
-4. To be prompted to enter your PPS number
+1. To show your ID with your PPS number.
+2. To stand in line.
+3. To enter booth with computer inside already running.
+4. To be prompted to enter your PPS number.
 5. To be prompted if the PPS number entered is valid or invalid.
 6. To be prompted if the PPS number format is correct or incorrect.
-7. To enter a valid and registered PPS number
-8. To be prompted with your voting ID number
-9. To be prompted with who you would like to vote for
-10. To vote for one of the two nominees
-11. To recieve a confirmation and thank you message
-12. To clear the terminal after 5 seconds before the next voter
-13. To leave the booth
-14. To have next voter enter and repeat
-15. To be prompted when the voting has closed and who won
+7. To be prompted with a try again message if format or input is invalid.
+8. To enter a valid and registered PPS number.
+9. To be prompted with your voting ID number.
+10. To be prompted with who you would like to vote for.
+11. To vote for one of the two nominees.
+12. To recieve a confirmation and thank you message.
+13. To clear the terminal after 5 seconds before the next voter.
+14. To leave the booth.
+15. To have next voter enter and repeat.
+16. To be prompted when the voting has closed and who won.
 
 ## Pre-made PPS Numbers on spreadsheet
 
@@ -148,12 +149,16 @@ NOMINEE (string)
 - Inform the user to use a valid PPS number next time they vote
 <img src="docs/voting-pps-invalid-format-no.png">
 
+### Input anything but 'y' or 'n'
+- Inform the user the input was invalid and if they would like to try again
+<img src="docs/voting-input-invalid-yes-or-no.png">
+
 ### Input all votes for a draw
-- 
+- Inform all voters the voting is now closed and the result was a draw
 <img src="docs/voting-result-draw.png">
 
 ### Input all votes for a win
-- 
+- Inform all voters the voting is now closed and who the winner is
 <img src="docs/voting-result-win.png">
 
 
@@ -208,19 +213,25 @@ There were no errors or warnings.
 |-------------|------------|---------------------|-------------------|
 | Input | Input a PPS number that already has already voted | User is prompted with a message that this PPS numbers has already voted | PASSED |
 
-2. Input a PPS number in correct format but not on the Google Spreadsheet
+6. Input a PPS number in correct format but not on the Google Spreadsheet
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
 | Input & Try again | Input an invalid PPS number in the correct format | Checks spreadsheet for PPS number and prompts that it is not registered and if they would like to try again | PASSED |
 
-3. Input a PPS in invalid format
+7. Input a PPS in invalid format
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
 | Input & Try again | Input an invalid PPS number in incorrect format |User is prompted that it is not in correct format and if they would like to try again | PASSED |
 
-6. To vote with all 4 voters registered.
+8. Input an invalid option for the try again option
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Input & Try again | Input anything but 'y' or 'n' | User is prompted with a message that their input was invalid and if they would like to try again | PASSED |
+
+9. To vote with all 4 voters registered.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
