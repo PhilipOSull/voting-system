@@ -83,14 +83,14 @@ def voting(nominee_1, nominee_2, voter_id_list):
     while True:
         if voter_id_list == []:
             total_votes = nominee_1_votes + nominee_2_votes
-            print("Voting is now closed\n")
+            print("Voting is now closed.\n")
             if nominee_1_votes >= nominee_2_votes:
                 percent = round(
                     (nominee_1_votes / total_votes) * 100,
                     2
                 )
                 if percent == 50:
-                    print("The election was a draw\n")
+                    print("The result of the election is a draw.\n")
                 else:
                     print(f"{nominee_1} wins, with {percent}% of the votes")
                 break

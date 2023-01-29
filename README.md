@@ -1,8 +1,11 @@
 # Voting System
 
-This is an electronic voting system designed for the user to input pre-made PPS numbers, if the correct PPS numbers are input they will be prompted with a message
-printing their ID number and asking them who they would like to vote for. The 
-spreadsheet will then update showing they voted and who they voted for.
+This is an electronic voting system designed for the user to input pre-made PPS numbers. If the correct PPS numbers are input, they will receive a message
+printing their ID number and a prompt asking them who they would like to vote for. The spreadsheet will then update, showing that they voted and who they voted for.
+
+<img src="docs/voting-welcome-message.png">
+
+[Live Webpage](https://voting-system-project.herokuapp.com/)
 
 (Developer: Philip O'Sullivan)
 
@@ -157,41 +160,53 @@ a PPS on the spreadsheet. If it matches with a PPS on the spreadsheet the user w
 
 ### Testing user stories
 
-1. To Enter a PPS number.
+1. To Enter a valid PPS number from Google Spreadsheet.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Input PPS | Input a valid PPS number | Accepts PPS number and allows the user to cast their vote | PASSED |
+| Input | Input a valid PPS number | Accepts PPS number and allows the user to cast their vote | PASSED |
 
-2. Enter an invalid PPS number in correct format.
-
-| **Feature** | **Action** | **Expected Result** | **Actual Result** |
-|-------------|------------|---------------------|-------------------|
-| Input PPS | Input an invalid PPS number in the correct format | Checks spreadsheet for PPS number and prompts that it is not registered | PASSED |
-
-3. Enter an invalid PPS with incorrect format.
+2. To input a valid option for nominee.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Input PPS | Input an invalid PPS number in incorrect format |User is prompted if they would like to try again | PASSED |
+| Input | Input (1) or (2) depending on the nominee to vote for | Confirms the vote and updates it to the Spreadsheet | PASSED |
 
-4. To vote for a nominee, 1 or 2.
-
-| **Feature** | **Action** | **Expected Result** | **Actual Result** |
-|-------------|------------|---------------------|-------------------|
-| Input Vote | Input 1 or 2 depending on the nominee to vote for | Accepts the vote and counts it correctly at the end of the voting | PASSED |
-
-5. To vote besides 1 or 2(Nominees).
+3. To input an invalid option for nominee.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Input Vote | Input anything besides 1 or 2 | User is prompted with a message saying the vote is invalid | PASSED |
+| Input | Input anything besides 1 or 2 | User is prompted with a message saying the vote is invalid/spoilt | PASSED |
 
-6. To vote with all 10 voters registered.
+4. Input a PPS that has had an invalid/Spoilt vote
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Input 10 Votes | Input all 10 votes using all valid 10 PPS numbers | Ends the voting and prompts the user with the correct result | PASSED |
+| Input & Spoilt | Input a PPS number that already has an invalid/spoilt vote | User is prompted with a message that this PPS numbers vote has already been counted as invalid/spoilt | PASSED |
+
+5. Input a PPS number that has already voted
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Input | Input a PPS number that already has already voted | User is prompted with a message that this PPS numbers has already voted | PASSED |
+
+2. Input a PPS number in correct format but not on the Google Spreadsheet
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Input & Try again | Input an invalid PPS number in the correct format | Checks spreadsheet for PPS number and prompts that it is not registered and if they would like to try again | PASSED |
+
+3. Input a PPS in invalid format
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Input & Try again | Input an invalid PPS number in incorrect format |User is prompted that it is not in correct format and if they would like to try again | PASSED |
+
+6. To vote with all 4 voters registered.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| End result | Input all 4 votes using all valid 4 PPS numbers | Ends the voting and prompts the user with the correct result | PASSED |
 
 ## Deployment
 
