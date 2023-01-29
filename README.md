@@ -179,7 +179,11 @@ NOMINEE (string)
 5. Select 'pycodestyle' from the list.
 6. PEP8 errors will now be underlined in red, as well as being listed in the PROBLEMS tab beside the terminal.
 
-There were no errors or warnings.
+- I also used https://pep8ci.herokuapp.com/
+
+Results:
+
+All clear, no errors found
 
 ### Testing user stories
 
