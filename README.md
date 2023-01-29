@@ -64,6 +64,10 @@ which nominee they have voted for.
 - The user will input their PPS, the function will check if that PPS matches
 a PPS on the spreadsheet. If it matches with a PPS on the spreadsheet the user will receive a message showing their voter ID and which nominee they would like to vote for. Once the user has chosen either of these nominees they will be prompted with a message confirming the vote. Then the Google Spreadsheet will be updated with this information.
 
+### Note
+
+- I acknowledge that perhaps a real-world electronic voting system would allow the user to re-try voting if they provided an invalid candidate number, however, traditional voting systems account for  spoilt votes, which I wanted to simulate here. The program already demonstrates input validation elsewhere (with the option for the user to retry where they've entered an invalid input).
+
 ## Technologies Used
 
 ### Languages
@@ -87,7 +91,57 @@ a PPS on the spreadsheet. If it matches with a PPS on the spreadsheet the user w
 
 ### Welcome Message
 - 
-<img src="">
+<img src="docs/voting-welcome-message.png">
+
+### Input valid PPS from Google Spreadsheet
+- 
+<img src="docs/voting-prompted-to-vote.png">
+
+### Input valid option for nominee
+- 
+<img src="docs/voting-prompted-to-vote-valid.png">
+
+### Input an invalid option for nominee
+- 
+<img src="docs/voting-input-invalid-vote.png">
+
+### Input a PPS that has had an invalid/Spoilt vote
+- 
+<img src="docs/voting-input-pps-with-invalid-vote.png">
+
+### Input a PPS number that has already voted
+- 
+<img src="docs/voting-pps-already-voted.png">
+
+### Input a PPS in correct format but not on the Google Spreadsheet
+- 
+<img src="docs/voting-pps-not-on-spreadsheet.png">
+
+### Answer - 'Y'es
+- 
+<img src="docs/voting-pps-not-registered-retry-yes.png">
+
+### Answer - 'N'o
+- 
+<img src="docs/voting-pps-not-registered-retry-no.png">
+
+### Input a PPS in invalid format
+- 
+<img src="docs/voting-pps-invalid-format.png">
+
+### Answer - 'Y'es
+- 
+<img src="docs/voting-pps-invalid-format-yes.png">
+
+### Answer - 'N'o
+- 
+<img src="docs/voting-pps-invalid-format-no.png">
+
+
+### Features to implement in the future
+
+- I would like to add an Admin
+- I would like to add a password, so each user would enter their PPS followed by a password to vote
 
 ## Validation
 
